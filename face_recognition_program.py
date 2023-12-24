@@ -19,3 +19,38 @@ def get_face_encoding():
         face_names[i] = name.split(".")[0] # to remove ".jpg" or any other image extension
 
     return face_encoding, face_names
+
+
+# retrieving face encodings and storing them in the face_encodings variable, along with the names
+face_encodings, face_names = get_face_encoding()
+
+video = cv2.VideoCapture(0)
+
+scl = 2 # scales down the webcam so the program runs faster
+
+# continuously capturing webcam footage
+while True:
+    success, image = video.read()
+
+    # making current frame smaller so program runs faster
+    resized_image = cv2.resize(image, (int(image.shape[1]/scl), int(image.shape[0]/scl)))
+
+    # converting current frame to RGB, since that's what face recognition uses
+    rgb_image = cv2.cvtColor(resized_image, cv2.COLOR_BGR2RGB)
+
+    # retrieving face location coordinates and unknown encodings
+    face_locations = fr.face_locations(rgb_image)
+    unknown_encodings = fr.face_encodings(rgb_image, face_locations)
+
+    # Iterating through each encoding, as well as the face's location
+    for face_encodings, face_location in zip(unknown_encodings, face_locations):
+
+        # comparing known faces with unknown faces
+        result = fr.compare_faces(face_encodings, face_encodings, 0.4)
+
+        # getting correct name if a match was found
+        if True in result:
+            name = face_names[result.index(True)]
+
+            # setting coordinates for face location
+            top, right, bottom, left = face_location
