@@ -1,0 +1,5 @@
+# Jet Brains files
+.idea/
+
+# MacOs files
+.DS_Store
