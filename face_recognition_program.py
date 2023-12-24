@@ -61,3 +61,7 @@ while True:
             # setting font, as well as displaying text of name
             font = cv2.FONT_HERSHEY_DUPLEX
             cv2.putText(image, name, (left*scl, bottom*scl * 20), font, 0.8, (255, 255, 255), 1)
+
+    # Displaying final image on the screen
+    cv2.imshow("frame", image)
+    cv2.waitKey(1)
