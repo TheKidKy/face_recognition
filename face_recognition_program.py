@@ -43,10 +43,10 @@ while True:
     unknown_encodings = fr.face_encodings(rgb_image, face_locations)
 
     # Iterating through each encoding, as well as the face's location
-    for face_encodings, face_location in zip(unknown_encodings, face_locations):
+    for face_encoding, face_location in zip(unknown_encodings, face_locations):
 
         # comparing known faces with unknown faces
-        result = fr.compare_faces(face_encodings, face_encodings, 0.4)
+        result = fr.compare_faces(face_encodings, face_encoding, 0.4)
 
         # getting correct name if a match was found
         if True in result:
