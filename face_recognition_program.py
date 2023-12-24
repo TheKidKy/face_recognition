@@ -54,3 +54,10 @@ while True:
 
             # setting coordinates for face location
             top, right, bottom, left = face_location
+
+            # drawing rectangle around face
+            cv2.rectangle(image, (left*scl, top*scl), (right*scl, bottom*scl), (0, 0, 255), 2)
+
+            # setting font, as well as displaying text of name
+            font = cv2.FONT_HERSHEY_DUPLEX
+            cv2.putText(image, name, (left*scl, bottom*scl * 20), font, 0.8, (255, 255, 255), 1)
