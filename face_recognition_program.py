@@ -8,12 +8,12 @@ faces_path = "~\\Desktop\\faces\\known" # replace your own folder path
 
 # Function to get face names, as well as face encodings
 def get_face_encoding():
-    face_names = os.listdir(f"{faces_path}\\known")
+    face_names = os.listdir(f"{faces_path}")
     face_encoding = []
 
     # retrieves all face encodings and store them in a list
     for i, name in enumerate(face_names):
-        face = fr.load_image_file(f"{faces_path}\\known\\{name}")
+        face = fr.load_image_file(f"{faces_path}\\{name}")
         face_encoding.append(fr.face_encodings(face)[0])
 
         face_names[i] = name.split(".")[0] # to remove ".jpg" or any other image extension
